@@ -7,7 +7,7 @@ var dx = 2;
 var dy = -2;
 var img = new Image();
 var mouseIsPressed = false;
-img.src = "../resources/DVD_logo.svg";
+img.src = "./resources/DVD_logo.svg";
 document.addEventListener("mousemove", mouseMoveHandler, false);
 document.addEventListener("mousedown", mouseDownHandler, false);
 document.addEventListener("mouseup", mouseUpHandler, false);
