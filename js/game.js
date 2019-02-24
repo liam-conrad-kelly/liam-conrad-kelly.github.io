@@ -8,16 +8,16 @@ var dy = -2;
 var img = new Image();
 var mouseIsPressed = false;
 img.src = "./resources/DVD_logo.svg";
-document.addEventListener("mousemove", mouseMoveHandler, false);
-document.addEventListener("mousedown", mouseDownHandler, false);
-document.addEventListener("mouseup", mouseUpHandler, false);
+// document.addEventListener("mousemove", mouseMoveHandler, false);
+// document.addEventListener("mousedown", mouseDownHandler, false);
+// document.addEventListener("mouseup", mouseUpHandler, false);
 
 
 function draw() {
     drawBall();
-    // determineDirection();
- //    x += dx;
- //    y += dy;
+    determineDirection();
+    x += dx;
+    y += dy;
 }
 
 function drawBall() {
@@ -31,39 +31,39 @@ function drawBall() {
 }
 
 function determineDirection() {
-    if((x + r >= canvas.width) || (x - r/2 <= r/2)) {
+    if((x + r >= canvas.width) || (x <= 0)) {
         dx = dx * -1;
     } 
-    if((y + r >= canvas.height) || (y - r/2 <= r/2)) {
+    if((y + r >= canvas.height) || (y <= 0)) {
         dy = dy * -1;
     }
 }
 
-function mouseDownHandler(e) {
-    mouseIsPressed = true;
-    var relativeX = e.clientX - canvas.offsetLeft;
-    var relativeY = e.clientY - canvas.offsetTop;
-    if(relativeX > 0 && relativeX < canvas.width) {
-        x = relativeX - r/2;
-    }
-    if(relativeY > 0 && relativeY < canvas.height) {
-        y = relativeY - r/2;
-    }
-}
+// function mouseDownHandler(e) {
+//     mouseIsPressed = true;
+//     var relativeX = e.clientX - canvas.offsetLeft;
+//     var relativeY = e.clientY - canvas.offsetTop;
+//     if(relativeX > 0 && relativeX < canvas.width) {
+//         x = relativeX - r/2;
+//     }
+//     if(relativeY > 0 && relativeY < canvas.height) {
+//         y = relativeY - r/2;
+//     }
+// }
 
-function mouseUpHandler(e) {
-    mouseIsPressed = false;
-}
+// function mouseUpHandler(e) {
+//     mouseIsPressed = false;
+// }
 
-function mouseMoveHandler(e) {
-    var relativeX = e.clientX - canvas.offsetLeft;
-    var relativeY = e.clientY - canvas.offsetTop;
-    if(relativeX > 0 && relativeX < canvas.width && mouseIsPressed == true) {
-        x = relativeX - r/2;
-    }
-    if(relativeY > 0 && relativeY < canvas.height && mouseIsPressed == true) {
-        y = relativeY - r/2;
-    }
-}
+// function mouseMoveHandler(e) {
+//     var relativeX = e.clientX - canvas.offsetLeft;
+//     var relativeY = e.clientY - canvas.offsetTop;
+//     if(relativeX > 0 && relativeX < canvas.width && mouseIsPressed == true) {
+//         x = relativeX - r/2;
+//     }
+//     if(relativeY > 0 && relativeY < canvas.height && mouseIsPressed == true) {
+//         y = relativeY - r/2;
+//     }
+// }
 
 setInterval(draw, 10);
