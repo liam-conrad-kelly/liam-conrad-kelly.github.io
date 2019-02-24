@@ -14,15 +14,15 @@ document.addEventListener("mouseup", mouseUpHandler, false);
 
 
 function draw() {
-	drawBall();
-	// determineDirection();
+    drawBall();
+    // determineDirection();
  //    x += dx;
  //    y += dy;
 }
 
 function drawBall() {
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	ctx.drawImage(img, x, y, r, r);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, x, y, r, r);
     // ctx.beginPath();
     // ctx.arc(x, y, r, 0, Math.PI*2);
     // ctx.fillStyle = "#0095DD";
@@ -31,16 +31,16 @@ function drawBall() {
 }
 
 function determineDirection() {
-	if((x + r >= canvas.width) || (x - r/2 <= r/2)) {
-		dx = dx * -1;
-	} 
-	if((y + r >= canvas.height) || (y - r/2 <= r/2)) {
-		dy = dy * -1;
-	}
+    if((x + r >= canvas.width) || (x - r/2 <= r/2)) {
+        dx = dx * -1;
+    } 
+    if((y + r >= canvas.height) || (y - r/2 <= r/2)) {
+        dy = dy * -1;
+    }
 }
 
 function mouseDownHandler(e) {
-	mouseIsPressed = true;
+    mouseIsPressed = true;
     var relativeX = e.clientX - canvas.offsetLeft;
     var relativeY = e.clientY - canvas.offsetTop;
     if(relativeX > 0 && relativeX < canvas.width) {
@@ -52,7 +52,7 @@ function mouseDownHandler(e) {
 }
 
 function mouseUpHandler(e) {
-	mouseIsPressed = false;
+    mouseIsPressed = false;
 }
 
 function mouseMoveHandler(e) {
