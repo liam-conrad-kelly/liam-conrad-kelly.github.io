@@ -53,13 +53,6 @@ function mouseDownHandler(e) {
     mouseIsPressed = true;
     clickX = e.clientX - canvas.offsetLeft;
     clickY = e.clientY - canvas.offsetTop;
-    console.log("Mouse is pressed, clickX is: " + clickX + " clickY is: " + clickY);
-    console.log("lower x: " + clickBoxX + " upper x: " + (clickBoxX + clickBoxLength));
-    console.log("lower y: " + clickBoxY + " upper y: " + (clickBoxY + clickBoxLength));
-
-    if(isInClickBox(clickX, clickY)) {
-        console.log("inside the box!");
-    }
 }
 
 function mouseUpHandler(e) {
@@ -82,7 +75,6 @@ function addProgress(x, y) {
     var dist = Math.sqrt((x - clickX) + (y - clickY));
     if(innerY - (dist*progressMulti) >= outlineY) {
         innerY -= (dist*progressMulti);
-        console.log("SUBTRACTED " + dist + " FROM HEIGHT. NEW VALUE: " + innerY);
     }
     clickX = x;
     clickY = y;

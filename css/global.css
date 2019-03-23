@@ -1,0 +1,22 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Varela Round', sans-serif;
+}
+
+canvas {
+    cursor: none;
+    background: #eee; 
+    /*display: block; 
+    margin: 0 auto;*/
+}
+
+.fullscreen {
+    width: 100%;
+    height: 100%;
+    position:relative;
+}
+
+html, body {
+    height: 100%;
+}
