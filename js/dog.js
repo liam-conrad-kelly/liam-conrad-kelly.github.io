@@ -8,13 +8,42 @@ var fontSize = canvas.width/50;
 ctx.font = fontSize + "px Varela Round";
 var resetText = "RESET";
 
-var dog = new Image();
+var dog1 = new Image();
+var dog2 = new Image();
+var dog3 = new Image();
 var handOn = new Image();
 var handOff = new Image();
-dog.src = "../resources/dog.png";
+dog1.src = "../resources/1_strip.png";
+dog2.src = "../resources/2_strip.png";
+dog3.src = "../resources/3_strip.png";
 handOn.src = "../resources/handOn.png";
 handOff.src = "../resources/handOff.png";
 
+var imgObj1 = {
+    'source': dog1,
+    'current': 0,
+    'total_frames': 5,
+    'width': 1920,
+    'height': 1080
+};
+
+var imgObj2 = {
+    'source': dog2,
+    'current': 0,
+    'total_frames': 24,
+    'width': 1920,
+    'height': 1080
+};
+
+var imgObj3 = {
+    'source': dog3,
+    'current': 0,
+    'total_frames': 40,
+    'width': 1920,
+    'height': 1080
+};
+
+// img_obj.source = dog1;
 
 var mouseIsPressed = false;
 document.addEventListener("mousemove", mouseMoveHandler, false);
@@ -24,13 +53,14 @@ var clickX = 0;
 var clickY = 0;
 var cursorX = 0;
 var cursorY = 0;
-var progressMulti = 0.05;
+var progressMulti = 0.15;
 
 //dog click box
-var dogBoxWidth = canvas.width / 2;
-var dogBoxHeight = 0.75 * dogBoxWidth;
+var dogBoxWidth = canvas.width;
+var dogBoxHeight = 0.5625 * dogBoxWidth;
 var dogBoxX = canvas.width/2 - dogBoxWidth/2;
 var dogBoxY = canvas.height/2 - dogBoxHeight/2;
+console.log("x: " + dogBoxX + ", y: " + dogBoxY + ", width: " + dogBoxWidth + ", height: " + dogBoxHeight);
 
 //progress meter shapes
 var outlineBuffer = 50;
@@ -50,13 +80,18 @@ function drawImages() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     //add reset button
-    ctx.fillStyle = "black";
-    ctx.fillText(resetText, 10, 50);
+    // ctx.fillStyle = "black";
+    // ctx.fillText(resetText, 10, 50);
 
-    ctx.drawImage(dog, dogBoxX, dogBoxY, dogBoxWidth, dogBoxHeight);
+    //ctx.drawImage(dog, dogBoxX, dogBoxY, dogBoxWidth, dogBoxHeight);
+    draw_anim(ctx, dogBoxX, dogBoxY, imgObj3);
+    draw_anim(ctx, dogBoxX, dogBoxY, imgObj2);
+    draw_anim(ctx, dogBoxX, dogBoxY, imgObj1);
+
+
 
     //draw hand at cursor location, image source changes based on mouse button held down or not
-    ctx.drawImage((mouseIsPressed ? handOn : handOff), cursorX, cursorY, dogBoxWidth/5, dogBoxWidth/5);
+    ctx.drawImage((mouseIsPressed ? handOn : handOff), cursorX, cursorY, dogBoxWidth/10, dogBoxWidth/10);
 
     //draw progress meter
     ctx.beginPath();
@@ -70,6 +105,8 @@ function drawImages() {
     ctx.fillStyle = "green";
     ctx.fill();
     ctx.closePath();
+
+    checkProgress();
 }
 
 
@@ -116,4 +153,25 @@ function fitToContainer(canvas, parent){
     canvas.height = parent.offsetHeight;
 }
 
-setInterval(draw, 10);
+function draw_anim(context, x, y, iobj) { // context is the canvas 2d context.
+    if (iobj.source != null)
+        context.drawImage(iobj.source, 0, iobj.current * iobj.height,
+                          iobj.width, iobj.height,
+                          x, y, dogBoxWidth, dogBoxHeight);
+    iobj.current = (iobj.current + 1) % iobj.total_frames;
+                   // incrementing the current frame and assuring animation loop
+}
+
+function checkProgress() {
+    var progressBarHeight = canvas.height - outlineBuffer - innerY;
+    var maxHeight = h;
+    var progress = progressBarHeight/maxHeight;
+    if(progress >= 0.50 && imgObj1.source != null) {
+        imgObj1.source = null;
+    }
+    if(progress >= 0.98 && imgObj2.source != null) {
+        imgObj2.source = null;
+    }
+}
+
+setInterval(draw, 33.3667000334); //29.97 FPS
